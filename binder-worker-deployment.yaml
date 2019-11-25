@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: binder-worker-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: binderWorker
+  template:
+    metadata:
+      labels:
+        app: binderWorker
+    spec:
+      containers:
+      - name: binder-worker-deployment
+        image: imilos/binder-worker:latest
+        env:
+        - name: BINDERHOST
+          value: "wbmaster.cbp-routing.ch"
+        - name: BINDERPORT
+          value: "4566"
+        - name: BINDERMANAGERPORT
+          value: "80"
+        - name: RSYNCPORT
+          value: "873"
+          
